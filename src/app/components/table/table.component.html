@@ -1,0 +1,46 @@
+<div *ngIf="products$" else loading>
+  <nz-table [nzData]="products$" #prd nzBordered>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Image</th>
+        <th>Category</th>
+        <th>Brand</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Sales Count</th>
+        <th>Edit order Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of prd.data">
+        <td>{{ data.id }}</td>
+        <td>
+          <app-image
+            imageUrl="{{ data.thumbnail }}"
+            [config]="{ width: 30, height: 15 }"
+          ></app-image>
+        </td>
+        <td>{{ data.category }}</td>
+        <td>{{ data.brand }}</td>
+        <td>{{ data.title }}</td>
+        <td>{{ data.price }}</td>
+        <td>{{ data.stock }}</td>
+        <td>
+          <span nz-tooltip nzTooltipTitle="{{ data.description }}">{{
+            data.sales || "not yet"
+          }}</span>
+        </td>
+        <td>
+          <button nz-button nzType="primary" (click)="handleClick(data)">
+            Edit
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <app-modal [currentProductDetail]="currentProductDetail"></app-modal>
+</div>
+<ng-template #loading>Waiting.</ng-template>

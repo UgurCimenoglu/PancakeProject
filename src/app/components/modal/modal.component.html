@@ -1,0 +1,35 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <ng-container *nzModalContent>
+    <h3>#{{ currentProductDetail.id }} - {{ currentProductDetail.title }}</h3>
+    <hr />
+    <form nz-form style="width: 100%; margin-top: 35px;" [formGroup]="validateForm" ng-submit ="handleOk()" >
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Sales Count</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzHasFeedback nzErrorTip="Required">
+          <input nz-input type="number" [ngModel]="currentProductDetail.sales || null" formControlName="sales" min="0"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Description</nz-form-label>
+        <nz-form-control
+          [nzSpan]="16"
+          nzErrorTip="Please write something here!"
+        >
+          <textarea
+            formControlName="description"
+            nz-input
+            rows="7"
+            placeholder="write any thing"
+            [ngModel]="currentProductDetail.description"
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item> </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
